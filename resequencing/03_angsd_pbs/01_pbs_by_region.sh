@@ -1,10 +1,12 @@
 #!/bin/bash
 # author: kira delmore
 # date: feb 2016
-# useage: ./pca.sh <list> <nInd> <minInd>
-# submits pbs file for each item in list
+# usage: ./pca.sh <list> <minInd> <pop1-4>
+# submits pbs file for each item (scaffold) in list
 # following guidelines from ngstools tutorial
 # for now using half the nInd for minInd
+# make sure you create the pbs dir and change the paths
+# modify based on populations you're interested in
 
 list="$1"
 pbs="pbs.pbs_long"
