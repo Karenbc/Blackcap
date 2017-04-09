@@ -1,0 +1,39 @@
+#!/bin/bash
+# author: kira delmore
+# date: july 2016
+# usage: qsub -c s <file>
+# submits file to queue
+
+#PBS -S /bin/bash
+#PBS -l walltime=72:00:00
+#PBS -l mem=4GB
+#PBS -l nodes=1:ppn=1
+#PBS -N freebays
+
+## odds and ends to set
+ref='/home/delmore/blackcaps_server/resequencing/ref/HybridScaffold_05_bppAdjust_cmap_Blackcap_BspQI_Hybrid_withnotusedNGS_fasta_NGScontigs_HYBRID_SCAFFOLD.fasta'
+
+cd $PBS_O_WORKDIR
+JOBINFO=freebays_${PBS_JOBID}
+echo "Starting run at: `date`" >> $JOBINFO
+
+#/usr/local/bin/freebayes --fasta-reference $ref realign_bam_final/UCM046.realigned.bam realign_bam_final/UCM048.realigned.bam realign_bam_final/UCM049.realigned.bam > freebays_snps/freebays_long_se.vcf       
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/9034.realigned.bam realign_bam_final/9029.realigned.bam realign_bam_final/9033.realigned.bam realign_bam_final/9030.realigned.bam realign_bam_final/9175.realigned.bam realign_bam_final/9201.realigned.bam realign_bam_final/9078.realigned.bam realign_bam_final/9239.realigned.bam realign_bam_final/9042.realigned.bam > freebays_snps/freebays_med_nw_moos.vcf  
+/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/DU07.realigned.bam realign_bam_final/DU08.realigned.bam realign_bam_final/EN01.realigned.bam realign_bam_final/EN08.realigned.bam realign_bam_final/BRN10.realigned.bam realign_bam_final/bcUK.realigned.bam > freebays_snps/freebays_med_nw_uk.vcf     
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/8201.realigned.bam realign_bam_final/UCM001.realigned.bam realign_bam_final/UCM004.realigned.bam realign_bam_final/UCM005.realigned.bam realign_bam_final/UCM006.realigned.bam realign_bam_final/UCM007.realigned.bam realign_bam_final/UCM008.realigned.bam realign_bam_final/UCM010.realigned.bam realign_bam_final/UCM002.realigned.bam realign_bam_final/UCM003.realigned.bam realign_bam_final/UCM009.realigned.bam > freebays_snps/freebays_med_se_aus.vcf
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/9357.realigned.bam realign_bam_final/9384.realigned.bam realign_bam_final/9380.realigned.bam realign_bam_final/9350.realigned.bam > freebays_snps/freebays_med_se_pol.vcf       
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/UCM012.realigned.bam realign_bam_final/UCM014.realigned.bam realign_bam_final/UCM016.realigned.bam realign_bam_final/UCM017.realigned.bam realign_bam_final/UCM018.realigned.bam > freebays_snps/freebays_med_sw_rad.vcf      
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/9194.realigned.bam realign_bam_final/9106.realigned.bam realign_bam_final/9130.realigned.bam realign_bam_final/9176.realigned.bam realign_bam_final/9138.realigned.bam realign_bam_final/9073.realigned.bam realign_bam_final/9167.realigned.bam realign_bam_final/9244.realigned.bam realign_bam_final/9179.realigned.bam realign_bam_final/9123.realigned.bam > freebays_snps/freebays_med_sw_moos.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/UCM050.realigned.bam realign_bam_final/UCM051.realigned.bam realign_bam_final/UCM053.realigned.bam realign_bam_final/UCM056.realigned.bam realign_bam_final/UCM057.realigned.bam realign_bam_final/UCM059.realigned.bam realign_bam_final/UCM060.realigned.bam realign_bam_final/UCM061.realigned.bam realign_bam_final/UCM063.realigned.bam realign_bam_final/UCM052.realigned.bam > freebays_snps/freebays_med_sw_bel.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/UCM143.realigned.bam realign_bam_final/UCM145.realigned.bam realign_bam_final/UCM148.realigned.bam realign_bam_final/UCM149.realigned.bam realign_bam_final/UCM150.realigned.bam realign_bam_final/UCM151.realigned.bam realign_bam_final/UCM153.realigned.bam realign_bam_final/UCM154.realigned.bam realign_bam_final/UCM155.realigned.bam realign_bam_final/UCM160.realigned.bam > freebays_snps/freebays_res_lis.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/UCM64.realigned.bam realign_bam_final/UCM66.realigned.bam realign_bam_final/UCM67.realigned.bam realign_bam_final/UCM71.realigned.bam realign_bam_final/UCM075.realigned.bam realign_bam_final/UCM076.realigned.bam realign_bam_final/UCM077.realigned.bam realign_bam_final/UCM081.realigned.bam realign_bam_final/UCM083.realigned.bam realign_bam_final/UCM084.realigned.bam > freebays_snps/freebays_res_anc.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/A270577.realigned.bam realign_bam_final/A270584.realigned.bam realign_bam_final/A270589.realigned.bam realign_bam_final/A270591.realigned.bam realign_bam_final/A270598.realigned.bam > freebays_snps/freebays_res_isl_azo.vcf      
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/1N23588.realigned.bam realign_bam_final/1N23590.realigned.bam realign_bam_final/N968342.realigned.bam realign_bam_final/N968352.realigned.bam realign_bam_final/2N96596.realigned.bam > freebays_snps/freebays_res_isl_pal.vcf      
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/CAVE7.realigned.bam realign_bam_final/CAVE9.realigned.bam realign_bam_final/CAVE13.realigned.bam realign_bam_final/CAVE22.realigned.bam realign_bam_final/CAVE27.realigned.bam > freebays_snps/freebays_res_isl_cap.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/1204.realigned.bam realign_bam_final/1206.realigned.bam realign_bam_final/1219.realigned.bam > freebays_snps/freebays_res_na.vcf        
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/UCM94.realigned.bam realign_bam_final/UCM95.realigned.bam realign_bam_final/UCM96.realigned.bam realign_bam_final/UCM97.realigned.bam realign_bam_final/UCM099.realigned.bam realign_bam_final/UCM117.realigned.bam realign_bam_final/UCM123.realigned.bam realign_bam_final/UCM137.realigned.bam realign_bam_final/UCM139.realigned.bam realign_bam_final/UCM140.realigned.bam > freebays_snps/freebays_short_sw.vcf 
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/4088.realigned.bam realign_bam_final/4089.realigned.bam realign_bam_final/4090.realigned.bam > freebays_snps/freebays_hill.vcf        
+#/usr/local/bin/freebayes --fasta-reference $ref  realign_bam_final/GW01.realigned.bam realign_bam_final/GW03.realigned.bam realign_bam_final/GW04.realigned.bam realign_bam_final/GW07.realigned.bam realign_bam_final/GW09.realigned.bam > freebays_snps/freebays_gard.vcf
+
+
+echo "Program finished with exit code $? at: `date`" >> $JOBINFO

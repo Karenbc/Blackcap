@@ -1,0 +1,38 @@
+#!/bin/bash
+# author: kira delmore
+# date: july 2016
+# usage: qsub -c s <file>
+# submits file to queue
+
+#PBS -S /bin/bash
+#PBS -l walltime=72:00:00
+#PBS -l mem=4GB
+#PBS -l nodes=1:ppn=1
+#PBS -N samtools
+
+## odds and ends to set
+ref='/home/delmore/blackcaps_server/resequencing/ref/HybridScaffold_05_bppAdjust_cmap_Blackcap_BspQI_Hybrid_withnotusedNGS_fasta_NGScontigs_HYBRID_SCAFFOLD.fasta'
+
+cd $PBS_O_WORKDIR
+JOBINFO=samtools_${PBS_JOBID}
+echo "Starting run at: `date`" >> $JOBINFO
+
+#/usr/local/bin/samtools mpileup -uf $ref -b long_se.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_long_se.vcf       
+#/usr/local/bin/samtools mpileup -uf $ref -b med_nw_moos.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_nw_moos.vcf  
+/usr/local/bin/samtools mpileup -uf $ref -b med_nw_uk.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_nw_uk.vcf     
+#/usr/local/bin/samtools mpileup -uf $ref -b med_se_aus.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_se_aus.vcf
+#/usr/local/bin/samtools mpileup -uf $ref -b med_se_pol.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_se_pol.vcf       
+#/usr/local/bin/samtools mpileup -uf $ref -b med_sw_rad.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_sw_rad.vcf      
+#/usr/local/bin/samtools mpileup -uf $ref -b med_sw_moos.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_sw_moos.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b med_sw_bel.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_med_sw_bel.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b res_lis.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_lis.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b res_anc.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_anc.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b res_isl_azo.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_isl_azo.vcf      
+#/usr/local/bin/samtools mpileup -uf $ref -b res_isl_pal.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_isl_pal.vcf      
+#/usr/local/bin/samtools mpileup -uf $ref -b res_isl_cap.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_isl_cap.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b res_na.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_res_na.vcf        
+#/usr/local/bin/samtools mpileup -uf $ref -b short_sw.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_short_sw.vcf 
+#/usr/local/bin/samtools mpileup -uf $ref -b hill.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_hill.vcf        
+#/usr/local/bin/samtools mpileup -uf $ref -b gard.list | /usr/local/bin/bcftools view -vcg - > samtools_snps/samtools_gard.vcf        
+
+echo "Program finished with exit code $? at: `date`" >> $JOBINFO

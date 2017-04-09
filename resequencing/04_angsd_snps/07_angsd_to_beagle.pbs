@@ -1,0 +1,20 @@
+## obtain genotype probabilities for ngsadmix
+## author: kira delmore
+## date: feb 2017
+
+#PBS -S /bin/bash
+#PBS -l walltime=264:00:00
+#PBS -l nodes=1:ppn=8
+#PBS -N beagle
+
+list=/home/delmore/blackcaps_server/resequencing/bam.filelist
+minind=60
+nind=110
+
+ANGSD='/home/delmore/tools/angsd_old/angsd'
+ld='/home/delmore/blackcaps_server/resequencing/ld'
+
+$ANGSD/angsd -nThreads 8 -b $list -out $ld/all_filt2 \
+        -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 \
+	-minMapQ 20 -minQ 20 \
+	-GL 1 -doGlf 2 -doMajorMinor 1 -SNP_pval 1e-6 -doMaf 1
