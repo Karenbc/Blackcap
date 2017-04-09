@@ -3,6 +3,8 @@
 # date: feb 2016
 # usage: ./align.sh <list>
 # submits pbs file for each item in list
+# change project name and paths
+# ensure you have the pbs folder created
 # modified from stickleback genome project, swth gbs project and comparative avian genomics project
 
 list="$1"
