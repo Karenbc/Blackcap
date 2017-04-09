@@ -1,8 +1,10 @@
 #!/bin/bash
 # author: kira delmore
 # date: feb 2016
-# useage: ./realign.sh <list>
+# usage: ./realign.sh <list>
 # submits pbs file for each item in list
+# change project name and paths
+# ensure you have the pbs folder created
 # modified from stickleback genome project, swth gbs project and comparative avian genomics project
 
 list="$1"
@@ -19,7 +21,7 @@ do
 #PBS -l nodes=1:ppn=1
 #PBS -N "$prefix"_realign
 
-project='test'
+project='demog'
 
 ## odds and ends to set
 #ref='/home/delmore/blackcaps_server/resequencing/ref/HybridScaffold_05_bppAdjust_cmap_Blackcap_BspQI_Hybrid_withnotusedNGS_fasta_NGScontigs_HYBRID_SCAFFOLD.folded.fasta'
