@@ -1,7 +1,7 @@
 #!/bin/bash
 # author: kira delmore
 # date: feb 2016
-# usage: ./align.sh <list> <project>
+# usage: ./align.sh <list>
 # submits pbs file for each item in list
 # modified from stickleback genome project, swth gbs project and comparative avian genomics project
 
