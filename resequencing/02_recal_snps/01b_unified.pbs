@@ -1,0 +1,40 @@
+#!/bin/bash
+# author: kira delmore
+# date: july 2016
+# usage: qsub -c s <file>
+# submits file to queue
+
+#PBS -S /bin/bash
+#PBS -l walltime=72:00:00
+#PBS -l mem=16GB
+#PBS -l nodes=1:ppn=8
+#PBS -N unified
+
+## odds and ends to set
+ref='/home/delmore/blackcaps_server/resequencing/ref/HybridScaffold_05_bppAdjust_cmap_Blackcap_BspQI_Hybrid_withnotusedNGS_fasta_NGScontigs_HYBRID_SCAFFOLD.fasta'
+
+cd $PBS_O_WORKDIR
+JOBINFO=unified_${PBS_JOBID}
+echo "Starting run at: `date`" >> $JOBINFO
+
+module load jdk-oracle/x64/8u60
+  
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I long_se.list -o unified_snps/unified_long_se.vcf       
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_nw_moos.list -o unified_snps/unified_med_nw_moos.vcf  
+java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_nw_uk.list -o unified_snps/unified_med_nw_uk.vcf     
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_se_aus.list -o unified_snps/unified_med_se_aus.vcf
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_se_pol.list -o unified_snps/unified_med_se_pol.vcf       
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_sw_rad.list -o unified_snps/unified_med_sw_rad.vcf      
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_sw_moos.list -o unified_snps/unified_med_sw_moos.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I med_sw_bel.list -o unified_snps/unified_med_sw_bel.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_lis.list -o unified_snps/unified_res_lis.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_anc.list -o unified_snps/unified_res_anc.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_isl_azo.list -o unified_snps/unified_res_isl_azo.vcf      
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_isl_pal.list -o unified_snps/unified_res_isl_pal.vcf      
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_isl_cap.list -o unified_snps/unified_res_isl_cap.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I res_na.list -o unified_snps/unified_res_na.vcf        
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I short_sw.list -o unified_snps/unified_short_sw.vcf 
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I hill.list -o unified_snps/unified_hill.vcf        
+#java -Xmx16g -jar /opt/biosoftware/GATK/GATK/GenomeAnalysisTK.jar -T UnifiedGenotyper -nt 8 -R $ref -I gard.list -o unified_snps/unified_gard.vcf
+
+echo "Program finished with exit code $? at: `date`" >> $JOBINFO
