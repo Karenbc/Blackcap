@@ -44,10 +44,10 @@ echo \"Starting run at: \`date\`\" >> \$JOBINFO
 export LD_LIBRARY_PATH=/usr/local/lib
 
 ## estimate sfs for each population
-\$ANGSD/angsd -b \$pop1 -anc \$ref -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop1.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop1.log
-\$ANGSD/angsd -b \$pop2 -anc \$ref -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop2.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop2.log
-\$ANGSD/angsd -b \$pop3 -anc \$ref -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop3.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop3.log
-\$ANGSD/angsd -b \$pop4 -anc \$ref -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop4.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop4.log
+\$ANGSD/angsd -b \$pop1 -ref \$ref -fold 1 -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop1.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop1.log
+\$ANGSD/angsd -b \$pop2 -ref \$ref -fold 1 -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop2.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop2.log
+\$ANGSD/angsd -b \$pop3 -ref \$ref -fold 1 -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop3.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop3.log
+\$ANGSD/angsd -b \$pop4 -ref \$ref -fold 1 -remove_bads 1 -uniqueOnly 1 -minMapQ 20 -minQ 20 -only_proper_pairs 1 -trim 0 -minInd \$minInd -P 2 -out \$pbs/"$prefix"_pop4.pbs -r "$prefix": -dosaf 1 -gl 1 2> \$log/"$prefix"_sfs_pop4.log
 
 ## obtain ml for different sets of MIGRATORY populations
 \$ANGSD/misc/realSFS \$pbs/"$prefix"_pop1.pbs.saf.idx \$pbs/"$prefix"_pop2.pbs.saf.idx -P 2 > \$pbs/"$prefix"_pop12.ml 2> \$log/"$prefix".pop12.ml.out
