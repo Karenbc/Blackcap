@@ -1,0 +1,63 @@
+#### start by converting angsd output to plink genotypes
+#### this is run using the script below that is found earlier in the pipeline (just do a search)
+04_angsd_to_plink.sh
+
+#### then prune the dataset for quality
+~/tools/plink --tfile ../plink/all_geno4_noz --geno 0.25 --mind 0.75 --maf 0.05 --make-bed --allow-extra-chr --out geno_mind_maf
+
+#### use rscript to select one random snp within windows of 1000 bp (actually used option 2)
+library(plyr)
+library(data.table)
+
+dat <- read.table("plink.bim")
+win <- 1000
+dat$bp_group <- as.integer(dat[,4]/win)+1
+dat$chrom_bp_gr <- sprintf("%s_%s",dat[,1],dat$bp_group)
+
+randomRows = function(df,n){
+  return(df[sample(nrow(df),n),])
+}
+
+scafs <- unique(dat$V1)
+
+## option_1
+
+for (i in 1:length(scafs)){
+  
+  scaf.i <- scafs[i]
+  scaf.dat <- subset(dat,dat$V1==scaf.i)
+  scaf.dat$V1 <- factor(scaf.dat$V1)
+  scaf.dat$V2 <- factor(scaf.dat$V2)
+  
+  random <- ddply(scaf.dat,.(chrom_bp_gr),randomRows,1)
+  
+  write.table(random,file=paste("random",scaf.i,sep="_"),quote=F,row.names=F,col.names=F)
+  rm(random)
+  rm(scaf.dat)
+  
+}
+
+## option_2
+
+for (i in 1:length(scafs)){
+  
+  scaf.i <- scafs[i]
+  scaf.dat <- subset(dat,dat$V1==scaf.i)
+  scaf.dat$V1 <- factor(scaf.dat$V1)
+  scaf.dat$V2 <- factor(scaf.dat$V2)
+  
+  df.split <- split(scaf.dat, scaf.dat$chrom_bp_gr)
+  df.sample <- lapply(df.split, randomRows, 1)
+  df.final <- do.call("rbind", df.sample)
+  write.table(df.final,file=paste("random",scaf.i,sep="_"),quote=F,row.names=F,col.names=F)
+  rm(df.final)
+  rm(scaf.dat)
+  
+}
+
+## final step to get the lists together
+cat random_Super-* > random_Super-Scaffolds
+awk '{print$2}' random_Super-Scaffolds > random_Super-Scaffolds_input
+
+#### estimate ld using same parameters from roesti nature communications paper (just two examples below)
+~/tools/plink --bfile plink --ld-window 100 --ld-window-kb 100 --ld-window-r2 0 --allow-extra-chr --r2 --keep ../long_se --extract random_Super-Scaffolds_input --out long_1000
