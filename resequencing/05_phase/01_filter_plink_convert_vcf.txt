@@ -1,4 +1,5 @@
 ### filter plink output produced by angsd and convert to vcf for other applications
+original data produced using script ../04_angsd_snps/04_angsd_plink (or something like that)
 
 ~/tools/plink --tfile all_geno4_noz --geno 0.25 --mind 0.25 --maf 0.05 --out geno_mind_maf --make-bed --allow-extra-chr
 ~/tools/plink --bfile geno_mind_maf --recode vcf-fid --allow-extra-chr --out geno_mind_maf
